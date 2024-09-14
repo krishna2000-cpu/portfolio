@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    nav {
+        width: 100%;
+        height: 10vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        position: sticky;
+        top: 0;
+        background-color: black;
+    }
+
+    .logo {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .logo span {
+        color: #077b32;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-size: 1.2rem;
+        position: relative;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #077b32;
+    }
+
+    .nav-links a::before {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background-color: #077b32;
+        transition: 0.3s;
+    }
+
+    .nav-links a:hover::before {
+        width: 100%;
+    }
+
+    /* Section Styles */
+    section {
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    .main-container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .main-container p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .main-container button {
+        background-color: #077b32;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .main-container button:hover {
+        background-color: white;
+        color: #077b32;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        margin-top: 50px;
+        background-color: black;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #077b32;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        display: none; /* Initially hidden */
+    }
+
+    .contact-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .contact-form input, .contact-form textarea {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+    }
+
+    .contact-form button {
+        background-color: #077b32;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .contact-form button:hover {
+        background-color: white;
+        color: #077b32;
+    }
+
+    .thank-you-message {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+        color: #077b32;
+    }
+
+    .popup {
+        display: none;
+        background-color: black;
+        color: white;
+        border: 1px solid #077b32;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px #077b32;
+        width: 50%;
+    }
+
+    .popup button {
+        background-color: #077b32;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .popup button:hover {
+        background-color: white;
+        color: #077b32;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Portfolio <span>Site</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="contact.html" id="contactButton">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Main Section -->
+  <section class="main-container">
+    <h1>Welcome to My Contact details</h1>
+    <p>I'm a passionate web developer building modern web applications.</p>
+    <button id="scrollToContactButton">Contact Me</button>
+   </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contactSection">
+    <h2>Contact Information</h2>
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="firstName" placeholder="First Name" required>
+      <input type="text" id="lastName" placeholder="Last Name" required>
+      <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="thank-you-message" id="thankYouMessage">
+      Thank you for contacting me!
+    </div>
+  </section>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <p>Thank you for reaching out! Your details have been saved.</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <script>
+    // Variables for button and contact section
+    const scrollToContactButton = document.getElementById("scrollToContactButton");
+    const contactButton = document.getElementById("contactButton");
+    const contactSection = document.getElementById("contactSection");
+    const contactForm = document.getElementById("contactForm");
+    const thankYouMessage = document.getElementById("thankYouMessage");
+    const popup = document.getElementById("popup");
+
+    // Function to scroll to contact section and show it
+    function scrollToContact() {
+      contactSection.style.display = 'block';
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Function to show popup message after form submission
+    function showPopup() {
+      popup.style.display = 'block';
+    }
+
+    // Function to close the popup
+    function closePopup() {
+      popup.style.display = 'none';
+    }
+
+    // Add event listeners to buttons
+    scrollToContactButton.addEventListener("click", scrollToContact);
+    contactButton.addEventListener("click", scrollToContact);
+
+    // Handle form submission
+    contactForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent page refresh
+      // Show popup or thank you message
+      showPopup();
+
+      // Simulate saving the form details (you can replace this with an API call)
+      const contactDetails = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        phoneNumber: document.getElementById("phoneNumber").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      };
+      console.log("Contact details saved:", contactDetails);
+    });
+  </script>
+
+</body>
+</html>
